@@ -1,0 +1,12 @@
+--- hts-tvheadend-78213a0/src/parser_latm.c.orig	2012-07-06 08:47:42.784374955 -0700
++++ hts-tvheadend-78213a0/src/parser_latm.c	2012-07-06 08:49:00.847483146 -0700
+@@ -71,6 +71,9 @@
+   else
+     sr = sri_to_rate(latm->sample_rate_index);
+ 
++  if(sr == 0)
++    return;
++
+   st->es_frame_duration = 1024 * 90000 / sr;
+ 
+   latm->channel_config = read_bits(bs, 4);
