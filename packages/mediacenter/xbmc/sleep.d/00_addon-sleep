@@ -25,4 +25,12 @@
 for script in $HOME/.xbmc/addons/*/sleep.d/*.power; do
   progress "running addon sleep script $script ($1)..."
   sh $script $1
+  case $? in
+    0 | 254)
+    ;;
+    *)  
+    progress "aborting sleep (due to script $script)"
+    return $? 
+    ;;
+  esac
 done
